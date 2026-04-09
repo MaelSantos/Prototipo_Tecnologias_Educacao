@@ -4,15 +4,14 @@ from agno.agent import Agent
 from agno.models.google import Gemini
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.valyu import ValyuTools
-# from agno.os import AgentOS
-# from agno.memory.memory import BufferMemory
+from agno.db.sqlite import SqliteDb
+from agno.os import AgentOS
 from dotenv import load_dotenv
 from fastapi import FastAPI
 
 load_dotenv()
 
 def criar_agente_info(stream_response=True):
-    # memoria = BufferMemory(max_tokens=512)
     agente = Agent(
         id="Estude",
         name="Organizador de Disciplinas",
@@ -31,8 +30,10 @@ def criar_agente_info(stream_response=True):
             "Use a ferramenta DuckDuckGo para obter dados atualizados."
             "Use a ferramenta Valyu para obter trabalhos acadêmicos confiáveis."
         ),
-        # memory=memoria,
-        # show_tool_calls=True,
+        db=SqliteDb(db_file="database/estude.db"),
+        add_datetime_to_context=True,
+        add_history_to_context=True, #mantém o histórico da conversa
+        num_history_runs=3,
         markdown=True,
         stream=stream_response,
     )
@@ -54,9 +55,10 @@ def interagir_com_agente(agente):
         except Exception as e:
             print(f"Erro: {e}")
             break
-if __name__ == "__main__":
-    meu_agente = criar_agente_info(stream_response=True)
-    interagir_com_agente(meu_agente)
-    
-    # agente_os = AgentOS(agents=[meu_agente])
-    # app = agente_os.get_app()
+# if __name__ == "__main__":
+meu_agente = criar_agente_info(stream_response=True)
+# interagir_com_agente(meu_agente)
+
+# fast_app = FastAPI(title="Teste")
+agente_os = AgentOS(agents=[meu_agente])
+app = agente_os.get_app()

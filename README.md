@@ -6,12 +6,20 @@ Integração de um agente de IA com técnicas de Learning Analytics para criar u
 
 ## Tecnologias
 
+### Pré-requisitos
+
+- [Python 3.14+](https://www.python.org/)
+- [UV](https://docs.astral.sh/uv/)
+- [FastAPI](https://fastapi.tiangolo.com/)
+
+### Tecnologias do Agente
 - [Agno](https://www.agno.com/)
 - [Google Gemini API](https://aistudio.google.com/)
 
-- Ferramentas
-    - [DuckDuckGo](https://duckduckgo.com/)
-    - [Valyu](https://www.valyu.ai/)
+
+### Ferramentas utilizadas pelo agente
+- [DuckDuckGo](https://duckduckgo.com/)
+- [Valyu](https://www.valyu.ai/)
 
 ## Demonstração
 
