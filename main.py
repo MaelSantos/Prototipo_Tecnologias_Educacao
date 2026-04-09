@@ -1,8 +1,10 @@
 from agno.agent import Agent
-from agno.models.openai import OpenAIChat
+# from agno.models.openai import OpenAIChat
+# from agno.models.anthropic import Claude
+from agno.models.google import Gemini
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.valyu import ValyuTools
-from agno.os import AgentOS
+# from agno.os import AgentOS
 # from agno.memory.memory import BufferMemory
 from dotenv import load_dotenv
 from fastapi import FastAPI
@@ -14,13 +16,20 @@ def criar_agente_info(stream_response=True):
     agente = Agent(
         id="Estude",
         name="Organizador de Disciplinas",
-        role="Assistente para buscar e fornecer informações detalhadas e confiáveis",
-        model=OpenAIChat(id="gpt-4o-mini"),
+        role="Assistente para ajudar na organização, estruturação e retenção de conteúdos de uma determinada disciplina",
+        # model=OpenAIChat(id="gpt-4o-mini"),
+        # model=Claude(id="claude-sonnet-4-5"),
+        # model=Claude(id="claude-3-haiku"),
+        # model=Gemini(id="gemini-2.5-pro-exp"),
+        # model=Gemini(id="gemini-2.5-flash"),
+        model=Gemini(id="gemini-3-flash-preview"),
         tools=[DuckDuckGoTools(), ValyuTools()],
         instructions=(
-            "Forneça respostas detalhadas, claras e baseadas em fontes confiáveis. "
-            "Use a ferramenta DuckDuckGo para obter dados atualizados. "
-            "Lembre-se do contexto das interações anteriores."
+            "Organizar e estruturar conteúdos de uma determinada disciplina, gerando resumos, exercícios e revisões."   
+            "Forneça respostas detalhadas, claras e baseadas em fontes confiáveis."
+            "Estruture os conteúdos por ordem de dificuldade levando em consideração quais são pré-requisitos para outros."
+            "Use a ferramenta DuckDuckGo para obter dados atualizados."
+            "Use a ferramenta Valyu para obter trabalhos acadêmicos confiáveis."
         ),
         # memory=memoria,
         # show_tool_calls=True,
@@ -28,9 +37,10 @@ def criar_agente_info(stream_response=True):
         stream=stream_response,
     )
     return agente
+
 # Passo 3: interagindo com o agente
 def interagir_com_agente(agente):
-    print("Pergunte algo para o agente (digite 'sair' para encerrar):")
+    print("Informe alguma disciplina que deseja estudar ao agente (digite 'sair' para encerrar):")
     while True:
         try:
             pergunta = input("\nVocê: ").strip()
