@@ -23,4 +23,15 @@ Integração de um agente de IA com técnicas de Learning Analytics para criar u
 
 ## Demonstração
 
-![Alt text](img/exemplo1.png "Exemplo de um teste da aplicação rodando")
+### Exemplo Terminal 
+![Alt text](img/exemplo1.png "Exemplo de um teste da aplicação rodando no terminal")
+
+### Exemplo Agno OS
+![Alt text](img/exemplo2.png "Exemplo de um teste da aplicação rodando pelo Agno OS")
+
+![Alt text](img/exemplo3.png "Exemplo de um teste da aplicação rodando pelo Agno OS")
+
+### Possíveis Erros
+![Alt text](img/erro1.png "Exemplo de erro de alta demanda")
+
+![Alt text](img/erro2.png "Exemplo de erro de limitação de cota grátis")
